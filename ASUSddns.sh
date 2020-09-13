@@ -20,8 +20,7 @@ calculate_password(){
 }
 
 get_wan_ip(){
-    echo $(curl --silent http://api.ipify.org/)
-    #echo $(ifconfig -a $(nvram get pppoe_ifname) 2>/dev/null | grep 'inet addr' | cut -d ':' -f 2 | cut -d ' ' -f 1)
+    echo $(ifconfig pppoe-wan | grep "inet addr" | awk '{ print $2}' | awk -F: '{print $2}')
 }
 
 is_dns_updated(){
